@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ page.title }}</title>
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
+  <title>{{ page.title }} | {{ site.title }}</title>
+
+  <!-- ✅ Correct CSS path for GitHub Pages subfolder -->
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -12,16 +13,16 @@
   <header class="site-header">
     <div class="header-inner">
       <span class="logo">{{ site.title }}</span>
-     
-<nav class="main-nav">
-  <a href="{{ site.baseurl }}/">Home</a>
-  <a href="{{ site.baseurl }}/articles/">Articles</a>
-</nav>
-
+      <nav class="main-nav">
+        <!-- ✅ Correct navigation paths -->
+        <a href="{{ site.baseurl }}/">Home</a>
+        <a href="{{ site.baseurl }}/articles/">Articles</a>
+      </nav>
       <button id="themeToggle" class="controls">🌓</button>
     </div>
   </header>
 
+  <!-- ✅ This will actually inject your page/post HTML -->
   {{ content }}
 
   <footer class="site-footer">
@@ -35,7 +36,9 @@
       document.body.classList.toggle('dark');
       localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     };
-    if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+    if(localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+    }
   </script>
 </body>
 </html>
