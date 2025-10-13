@@ -4,7 +4,7 @@ title: Psychology Insights Magazine
 description: A magazine-style psychology site sharing evidence-based articles & insights.
 baseurl: "/psychology-magazine"    # (since your site is in a subfolder)
 url: "https://tihas1.github.io"     # your GitHub Pages root URL
-theme: minima
+remote_theme: jekyll/minima
 plugins:
   - jekyll-feed
   - jekyll-paginate
