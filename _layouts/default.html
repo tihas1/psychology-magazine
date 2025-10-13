@@ -4,16 +4,20 @@
   <meta charset="UTF-8">
   <title>{{ page.title }}</title>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="{{ site.theme_mode }}">
   <header class="site-header">
     <div class="header-inner">
       <span class="logo">{{ site.title }}</span>
-      <nav class="main-nav">
-        <a href="{{ '/' | relative_url }}">Home</a>
-        <a href="{{ '/articles/' | relative_url }}">Articles</a>
-      </nav>
+     
+<nav class="main-nav">
+  <a href="{{ site.baseurl }}/">Home</a>
+  <a href="{{ site.baseurl }}/articles/">Articles</a>
+</nav>
+
       <button id="themeToggle" class="controls">🌓</button>
     </div>
   </header>
