@@ -6,7 +6,7 @@ baseurl: "/psychology-magazine"    # (since your site is in a subfolder)
 url: "https://tihas1.github.io"     # your GitHub Pages root URL
 theme: minima
 plugins:
-  - jekyll-paginate
+  - jekyll-feed
 
 paginate: 6
 paginate_path: "/page:num/"
