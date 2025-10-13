@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Psychology Insights Magazine</h1>
+    <p class="tagline">Evidence-based articles, practical tips, and thoughtful commentary on mind & behavior.</p>
+  </div>
+</section>
+
+<section class="featured">
+  <h2>Featured</h2>
+  <div class="grid">
+    {% for post in site.posts limit:6 %}
+      {% include post-card.html post=post %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="recent">
+  <h2>Latest Articles</h2>
+  <div class="grid">
+    {% for post in site.posts offset:6 limit:9 %}
+      {% include post-card.html post=post %}
+    {% endfor %}
+  </div>
+  <nav class="pagination">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path }}">Previous</a>
+    {% endif %}
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path }}">Next</a>
+    {% endif %}
+  </nav>
+</section>

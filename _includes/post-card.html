@@ -1,0 +1,14 @@
+<article class="post-card">
+  <a href="{{ post.url | relative_url }}">
+    {% if post.featured_image %}
+      <div class="post-card-image">
+        <img src="{{ post.featured_image }}" alt="{{ post.title }}">
+      </div>
+    {% endif %}
+    <div class="post-card-body">
+      <h3 class="post-card-title">{{ post.title }}</h3>
+      <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+      <p class="post-card-meta">{{ post.date | date: "%b %-d, %Y" }} • {{ post.category }}</p>
+    </div>
+  </a>
+</article>

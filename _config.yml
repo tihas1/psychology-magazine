@@ -1,0 +1,19 @@
+title: Psychology Insights Magazine
+description: A magazine-style psychology article site
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://yourname.github.io" # update after you publish
+theme: minima
+plugins:
+  - jekyll-paginate
+paginate: 6
+paginate_path: "/page:num/"
+markdown: kramdown
+kramdown:
+  input: GFM
+disqus:
+  shortname: your-disqus-shortname
+buttondown:
+  url: https://buttondown.email/yournewsletter
+# social / author metadata
+author: "Your Name"
+logo: /assets/images/feature-sample.jpg
