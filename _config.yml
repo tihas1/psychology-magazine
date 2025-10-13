@@ -1,19 +1,31 @@
+# _config.yml — for Psychology Magazine on GitHub Pages
+
 title: Psychology Insights Magazine
-description: A magazine-style psychology article site
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://yourname.github.io" # update after you publish
+description: A magazine-style psychology site sharing evidence-based articles & insights.
+baseurl: "/psychology-magazine"    # (since your site is in a subfolder)
+url: "https://tihas1.github.io"     # your GitHub Pages root URL
 theme: minima
 plugins:
   - jekyll-paginate
+
 paginate: 6
 paginate_path: "/page:num/"
+
 markdown: kramdown
 kramdown:
   input: GFM
+
+# Comments via Disqus
 disqus:
   shortname: your-disqus-shortname
+
+# Newsletter via Buttondown
 buttondown:
   url: https://buttondown.email/yournewsletter
-# social / author metadata
+
 author: "Your Name"
 logo: /assets/images/feature-sample.jpg
+
+# SEO / Social Meta (you can add more later)
+twitter_username: your_twitter_handle
+github_username: tihas1
