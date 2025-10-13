@@ -1,13 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  {% include head.html %}
-  <body>
-    {% include header.html %}
-    <main class="site-main">
-      {{ content }}
-    </main>
-    {% include footer.html %}
-    <!-- Disqus shortname placeholder. Change 'your-disqus-shortname' in _config.yml -->
-    <script>/* no additional scripts here */</script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body class="{{ site.theme_mode }}">
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo">{{ site.title }}</span>
+      <nav class="main-nav">
+        <a href="{{ '/' | relative_url }}">Home</a>
+        <a href="{{ '/articles' | relative_url }}">Articles</a>
+      </nav>
+      <button id="themeToggle" class="controls">🌓</button>
+    </div>
+  </header>
+
+  {{ content }}
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      © {{ "now" | date: "%Y" }} {{ site.title }}
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('themeToggle').onclick = () => {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    };
+    if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+  </script>
+</body>
 </html>
