@@ -2,7 +2,7 @@
   <a href="{{ post.url | relative_url }}">
     {% if post.featured_image %}
       <div class="post-card-image">
-        <img src="{{ post.featured_image }}" alt="{{ post.title }}">
+        <img src="{{ post.featured_image | relative_url }}" alt="{{ post.title }}">
       </div>
     {% endif %}
     <div class="post-card-body">
