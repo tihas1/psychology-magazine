@@ -5,6 +5,17 @@
 
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+/* auth modal */
+.fc-auth-modal{position:fixed;inset:0;display:none;background:rgba(10,10,12,0.45);align-items:center;justify-content:center;z-index:1200;}
+.fc-auth-modal.open{display:flex;}
+.fc-auth-card{background:#fff;padding:1.25rem;border-radius:10px;max-width:420px;width:92%;}
+.fc-auth-card .fc-auth-tabs{display:flex;gap:8px;margin-bottom:1rem;}
+.fc-auth-card .tab{flex:1;padding:.6rem;border-radius:8px;border:1px solid #eee;background:#f8f9fa;cursor:pointer}
+.fc-auth-card .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.fc-auth-card label{display:block;margin-top:.6rem;font-weight:600;font-size:.9rem}
+.fc-auth-card input{width:100%;padding:.6rem;margin-top:.35rem;border-radius:8px;border:1px solid #ddd}
+.fc-auth-card button{margin-top:1rem;padding:.6rem 1rem;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer}
+.fc-auth-close{position:absolute;right:14px;top:10px;background:none;border:none;font-size:18px;cursor:pointer}
 
 /* Base Reset */
 * {
