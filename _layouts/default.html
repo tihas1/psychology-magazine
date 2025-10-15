@@ -10,6 +10,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="{{ site.theme_mode }}">
+  {% if page.layout == "home" or page.layout == "articles" %}
+  {% include sidebar.html %}
+{% endif %}
+
   <header class="site-header">
     <div class="header-inner">
       <span class="logo">{{ site.title }}</span>
@@ -25,7 +29,9 @@
   </header>
 
   <!-- ✅ This will actually inject your page/post HTML -->
+  <div class="main-content">
   {{ content }}
+</div>
 
   <footer class="site-footer">
     <div class="footer-inner">
