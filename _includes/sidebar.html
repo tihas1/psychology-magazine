@@ -4,13 +4,15 @@
     <button class="close-sidebar" id="closeSidebar">✕</button>
   </div>
 
-  <nav class="sidebar-nav">
-    <a href="{{ site.baseurl }}/">🏠 Home</a>
-    <a href="{{ site.baseurl }}/articles/">📝 Articles</a>
-    <a href="#" id="loginBtn">🔑 Login</a>
-    <a href="#" id="logoutBtn" style="display:none;">🚪 Logout</a>
-    <button id="themeToggleSidebar">🌓 Toggle Theme</button>
-  </nav>
+ <nav class="sidebar-nav">
+  <a href="{{ site.baseurl }}/">🏠 Home</a>
+  <a href="{{ site.baseurl }}/articles/">📝 Articles</a>
+
+  <a href="#" id="loginBtn">🔑 Login</a>
+  <a href="#" id="logoutBtn" style="display:none;">🚪 Logout</a>
+  <div id="userLabel" style="margin-top:12px; font-weight:600;"></div>
+</nav>
+
 </div>
 
 <button class="sidebar-toggle" id="sidebarToggle">☰</button>
