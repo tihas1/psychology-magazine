@@ -9,6 +9,7 @@ if (sidebarToggle && sidebar) {
   });
 }
 
+
 if (closeSidebar && sidebar) {
   closeSidebar.addEventListener('click', () => {
     sidebar.classList.remove('open');
