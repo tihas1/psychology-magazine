@@ -12,6 +12,7 @@ if (loginBtn) {
   });
 }
 
+
 if (logoutBtn) {
   logoutBtn.addEventListener('click', () => {
     firebase.auth().signOut()
@@ -58,4 +59,5 @@ auth.onAuthStateChanged(user => {
     document.getElementById("logoutButtonContainer").style.display = "none";
   }
 });
+
 
