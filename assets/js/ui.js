@@ -1,17 +1,20 @@
-// ✅ Defensive check to avoid JS errors if elements are missing
-const sidebarToggle = document.getElementById('sidebarToggle');
-const sidebar = document.getElementById('sidebar');
-const closeSidebar = document.getElementById('closeSidebar');
+// assets/js/ui.js
+(function(){
+  const toggle = document.getElementById('sidebarToggle');
+  const sidebar = document.getElementById('sidebar');
+  const closeBtn = document.getElementById('closeSidebar');
 
-if (sidebarToggle && sidebar) {
-  sidebarToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('open'); // ✅ Toggle instead of only add
+  if (toggle && sidebar) {
+    toggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+  }
+  if (closeBtn && sidebar) {
+    closeBtn.addEventListener('click', () => sidebar.classList.remove('open'));
+  }
+
+  // accessibility: close sidebar on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar && sidebar.classList.contains('open')) {
+      sidebar.classList.remove('open');
+    }
   });
-}
-
-
-if (closeSidebar && sidebar) {
-  closeSidebar.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-  });
-}
+})();
