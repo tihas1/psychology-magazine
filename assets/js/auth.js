@@ -1,4 +1,24 @@
 // assets/js/auth.js
+// ✅ Firebase Authentication Handlers
+const loginBtn = document.getElementById('loginBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+
+if (loginBtn) {
+  loginBtn.addEventListener('click', () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+      .then(result => console.log('Logged in:', result.user.email))
+      .catch(err => console.error('Login error:', err));
+  });
+}
+
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', () => {
+    firebase.auth().signOut()
+      .then(() => console.log('Logged out'))
+      .catch(err => console.error('Logout error:', err));
+  });
+}
 
 // Show login popup
 document.getElementById("loginBtn").addEventListener("click", function (e) {
@@ -38,3 +58,4 @@ auth.onAuthStateChanged(user => {
     document.getElementById("logoutButtonContainer").style.display = "none";
   }
 });
+
