@@ -22,6 +22,9 @@
   --text-light: #f7f7f7;
   --text-muted: #555;
   --border: #e6e6e6;
+  --card: #ffffff; /* For light mode sidebar */
+  --text: #333; /* Default sidebar link text */
+  --shadow: 0 4px 12px rgba(0,0,0,0.08); /* Soft shadow for modern look */
 }
 
 /* Base Styles */
@@ -33,7 +36,11 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
 }
-
+body.dark {
+  --card: #1b1b1b;
+  --text: #ddd;
+  --shadow: 0 4px 12px rgba(255,255,255,0.05);
+}
 /* Typography */
 h1, h2, h3, h4 {
   font-family: 'Merriweather', serif;
