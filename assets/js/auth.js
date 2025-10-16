@@ -40,14 +40,22 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // --- Show/Hide Password
-  document.querySelectorAll(".toggle-password").forEach(icon => {
-    icon.addEventListener("click", () => {
-      const input = document.getElementById(icon.dataset.target);
-      const isHidden = input.type === "password";
-      input.type = isHidden ? "text" : "password";
-      icon.textContent = isHidden ? "🙈" : "👁";
-    });
-  });
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("toggle-password")) {
+    const targetId = e.target.dataset.target;
+    const input = document.getElementById(targetId);
+    if (!input) return;
+
+    if (input.type === "password") {
+      input.type = "text";
+      e.target.textContent = "🙈";
+    } else {
+      input.type = "password";
+      e.target.textContent = "👁";
+    }
+  }
+});
+
 
   // --- Forgot Password
   forgotPasswordLink?.addEventListener("click", (e) => {
@@ -100,3 +108,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
