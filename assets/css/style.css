@@ -440,7 +440,7 @@ body.dark .site-footer {
     gap: 1.5rem;
   }
 }
-/* --- Responsive Navigation --- */
+/* --- Responsive Navigation (fixed version) --- */
 .site-header {
   background: var(--header-bg, #fff);
   border-bottom: 1px solid #e5e7eb;
@@ -493,27 +493,30 @@ body.dark .site-footer {
     display: block;
   }
 
+  /* Hide nav by default */
   .main-nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
+    position: fixed;
+    top: 0;
+    right: -260px; /* hidden off screen */
+    height: 100%;
+    width: 240px;
     background: #fff;
     flex-direction: column;
-    align-items: flex-start;
-    width: 200px;
-    padding: 1rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    display: none;
+    padding: 2rem 1rem;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    transition: right 0.3s ease-in-out;
+    z-index: 200;
   }
 
+  /* When open */
   .main-nav.open {
-    display: flex;
+    right: 0;
   }
 
   .main-nav a {
-    padding: 0.5rem 0;
+    display: block;
     width: 100%;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
   }
 }
