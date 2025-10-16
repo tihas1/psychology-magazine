@@ -38,24 +38,23 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleAuthMode.innerText = "Already registered? Login";
     }
   });
-
-  // --- Show/Hide Password
+// --- Password Toggle (works for all forms)
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("toggle-password")) {
     const targetId = e.target.dataset.target;
     const input = document.getElementById(targetId);
-    if (!input) return;
 
-    if (input.type === "password") {
-      input.type = "text";
-      e.target.textContent = "🙈";
-    } else {
-      input.type = "password";
-      e.target.textContent = "👁";
+    if (input) {
+      if (input.type === "password") {
+        input.type = "text";
+        e.target.textContent = "🙈";
+      } else {
+        input.type = "password";
+        e.target.textContent = "👁";
+      }
     }
   }
 });
-
 
   // --- Forgot Password
   forgotPasswordLink?.addEventListener("click", (e) => {
@@ -116,5 +115,6 @@ registerForm?.addEventListener("submit", (e) => {
     }
   });
 });
+
 
 
