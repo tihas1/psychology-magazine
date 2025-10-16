@@ -1,7 +1,7 @@
 <div id="loginModal" class="fc-auth-modal">
   <div class="fc-auth-card">
     <button class="fc-auth-close" title="Close" onclick="document.getElementById('loginModal').classList.remove('open');">✕</button>
-    
+
     <div class="fc-auth-tabs">
       <button id="toggleAuthMode" class="tab">Don't have an account? Register</button>
     </div>
@@ -9,19 +9,39 @@
     <div class="fc-auth-body">
       <p id="fc-auth-msg" style="color:#b91c1c;"></p>
 
+      <!-- ✅ LOGIN FORM -->
       <form id="loginForm" style="display:block;">
         <label>Email</label>
         <input name="email" type="email" required />
+
         <label>Password</label>
-        <input name="password" type="password" required />
+        <div class="password-field">
+          <input name="password" type="password" required />
+          <label>
+            <input type="checkbox" id="showLoginPassword"> Show Password
+          </label>
+        </div>
+
         <button type="submit">Sign In</button>
+        <p><a href="#" id="forgotPasswordLink">Forgot password?</a></p>
       </form>
 
+      <!-- ✅ REGISTER FORM -->
       <form id="registerForm" style="display:none;">
+        <label>Display Name</label>
+        <input name="displayName" type="text" required />
+
         <label>Email</label>
         <input name="email" type="email" required />
+
         <label>Password</label>
-        <input name="password" type="password" required />
+        <div class="password-field">
+          <input name="password" type="password" required />
+          <label>
+            <input type="checkbox" id="showRegisterPassword"> Show Password
+          </label>
+        </div>
+
         <button type="submit">Create Account</button>
       </form>
     </div>
