@@ -8,19 +8,25 @@
 </head>
 <body class="{{ site.theme_mode }}">
 
-  <header class="site-header">
-    <div class="header-inner">
-      <span class="logo">{{ site.title }}</span>
-      <nav class="main-nav">
-        <a href="{{ site.baseurl }}/">Home</a>
-        <a href="{{ site.baseurl }}/articles/">Articles</a>
-        <a href="#" id="loginBtn">Login</a>
-        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
-        <span id="userEmailDisplay" style="display:none;margin-left:1rem;"></span>
-      </nav>
-      <button id="themeToggle" class="controls">🌓</button>
-    </div>
-  </header>
+ <header class="site-header">
+  <div class="header-inner">
+    <span class="logo">{{ site.title }}</span>
+
+    <!-- Mobile Menu Toggle -->
+    <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+      <a href="{{ site.baseurl }}/">Home</a>
+      <a href="{{ site.baseurl }}/articles/">Articles</a>
+      <a href="#" id="loginBtn">Login</a>
+      <a href="#" id="logoutBtn" style="display:none;">Logout</a>
+    </nav>
+
+    <button id="themeToggle" class="controls">🌓</button>
+  </div>
+</header>
+
 
   <!-- Sidebar (optional per layout) -->
   {% if page.layout == "default" or page.layout == "articles" %}
