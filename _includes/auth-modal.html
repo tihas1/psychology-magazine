@@ -10,15 +10,18 @@
       <p id="fc-auth-msg" style="color:#b91c1c;"></p>
 
       <!-- LOGIN FORM -->
-      <form id="loginForm" style="display:block;">
-        <label>Email</label>
-        <input name="email" type="email" required />
+    <form id="loginForm" style="display:block;">
+  <label>Email</label>
+  <input name="email" type="email" required />
 
-        <label>Password</label>
-        <div class="password-wrapper">
-          <input id="loginPassword" name="password" type="password" required />
-          <span class="toggle-password" data-target="loginPassword">👁</span>
-        </div>
+  <label>Password</label>
+  <div class="password-wrapper" style="position:relative;">
+    <input id="loginPassword" name="password" type="password" required />
+    <span class="toggle-password" data-target="loginPassword"
+          style="position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;">
+      👁
+    </span>
+  </div>
 
         <a href="#" id="forgotPasswordLink" class="forgot-link">Forgot password?</a>
         <button type="submit">Sign In</button>
@@ -32,9 +35,12 @@
   <input name="email" type="email" required />
 
   <label>Password</label>
-  <div class="password-wrapper">
+  <div class="password-wrapper" style="position:relative;">
     <input id="registerPassword" name="password" type="password" required />
-    <span class="toggle-password" data-target="registerPassword">👁</span>
+    <span class="toggle-password" data-target="registerPassword"
+          style="position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;">
+      👁
+    </span>
   </div>
 
   <button type="submit">Create Account</button>
