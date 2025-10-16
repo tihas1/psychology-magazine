@@ -1,29 +1,14 @@
 // --- assets/js/auth.js ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { 
-  getAuth, 
-  onAuthStateChanged, 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
-  signOut 
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+// Works with firebase v8 loaded in default.html
 
-// ✅ Replace with your Firebase project credentials
-const firebaseConfig = {
-  apiKey: "AIzaSyBdpseoX9t3uEB_nPzRTjdkJRqExCUvyQQ",
-  authDomain: "crafted-content-92d88.firebaseapp.com",
-  projectId: "crafted-content-92d88",
-  storageBucket: "crafted-content-92d88.firebasestorage.app",
-  messagingSenderId: "603925222453",
-  appId: "1:603925222453:web:886a9dc56817fee4128d7c",
-  measurementId: "G-3Q1RFWSB4W"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-// --- DOM logic ---
 document.addEventListener("DOMContentLoaded", () => {
+  if (typeof firebase === "undefined" || !firebase.auth) {
+    console.error("❌ Firebase not loaded. Check firebase-init.js and default.html script order.");
+    return;
+  }
+
+  const auth = firebase.auth();
+
   const loginModal = document.getElementById("loginModal");
   const loginBtn = document.getElementById("loginBtn");
   const logoutBtn = document.getElementById("logoutBtn");
@@ -31,19 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   const registerForm = document.getElementById("registerForm");
   const toggleAuthMode = document.getElementById("toggleAuthMode");
+
   let isLoginMode = true;
 
-  // ✅ Open modal
+  // Open modal
   loginBtn?.addEventListener("click", () => {
     loginModal.classList.add("open");
   });
 
-  // ✅ Close modal on outside click
+  // Close modal
   loginModal?.addEventListener("click", (e) => {
     if (e.target === loginModal) loginModal.classList.remove("open");
   });
 
-  // ✅ Toggle between login & register
+  // Toggle login/register
   toggleAuthMode?.addEventListener("click", () => {
     isLoginMode = !isLoginMode;
     if (isLoginMode) {
@@ -57,35 +43,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ✅ Login
+  // Login
   loginForm?.addEventListener("submit", (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        loginModal.classList.remove("open");
-      })
+    auth.signInWithEmailAndPassword(email, password)
+      .then(() => loginModal.classList.remove("open"))
       .catch(err => alert(err.message));
   });
 
-  // ✅ Register
+  // Register
   registerForm?.addEventListener("submit", (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        loginModal.classList.remove("open");
-      })
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(() => loginModal.classList.remove("open"))
       .catch(err => alert(err.message));
   });
 
-  // ✅ Logout
-  logoutBtn?.addEventListener("click", () => signOut(auth));
+  // Logout
+  logoutBtn?.addEventListener("click", () => auth.signOut());
 
-  // ✅ Auth state listener
-  onAuthStateChanged(auth, (user) => {
+  // Auth state
+  auth.onAuthStateChanged((user) => {
     if (user) {
       userEmailDisplay.innerText = `Hi, ${user.email}`;
       loginBtn.style.display = "none";
@@ -99,4 +81,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
