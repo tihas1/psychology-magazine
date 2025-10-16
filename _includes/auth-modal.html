@@ -1,7 +1,7 @@
 <div id="loginModal" class="fc-auth-modal">
   <div class="fc-auth-card">
     <button class="fc-auth-close" title="Close" onclick="document.getElementById('loginModal').classList.remove('open');">✕</button>
-
+    
     <div class="fc-auth-tabs">
       <button id="toggleAuthMode" class="tab">Don't have an account? Register</button>
     </div>
@@ -9,37 +9,30 @@
     <div class="fc-auth-body">
       <p id="fc-auth-msg" style="color:#b91c1c;"></p>
 
-      <!-- ✅ LOGIN FORM -->
+      <!-- LOGIN FORM -->
       <form id="loginForm" style="display:block;">
         <label>Email</label>
         <input name="email" type="email" required />
 
         <label>Password</label>
-        <div class="password-field">
-          <input name="password" type="password" required />
-          <label>
-            <input type="checkbox" id="showLoginPassword"> Show Password
-          </label>
+        <div class="password-wrapper">
+          <input id="loginPassword" name="password" type="password" required />
+          <span class="toggle-password" data-target="loginPassword">👁</span>
         </div>
 
+        <a href="#" id="forgotPasswordLink" class="forgot-link">Forgot password?</a>
         <button type="submit">Sign In</button>
-        <p><a href="#" id="forgotPasswordLink">Forgot password?</a></p>
       </form>
 
-      <!-- ✅ REGISTER FORM -->
+      <!-- REGISTER FORM -->
       <form id="registerForm" style="display:none;">
-        <label>Display Name</label>
-        <input name="displayName" type="text" required />
-
         <label>Email</label>
         <input name="email" type="email" required />
 
         <label>Password</label>
-        <div class="password-field">
-          <input name="password" type="password" required />
-          <label>
-            <input type="checkbox" id="showRegisterPassword"> Show Password
-          </label>
+        <div class="password-wrapper">
+          <input id="registerPassword" name="password" type="password" required />
+          <span class="toggle-password" data-target="registerPassword">👁</span>
         </div>
 
         <button type="submit">Create Account</button>
@@ -47,3 +40,37 @@
     </div>
   </div>
 </div>
+
+<style>
+  .password-wrapper {
+    position: relative;
+  }
+  .password-wrapper input {
+    width: 100%;
+    padding-right: 2rem;
+  }
+  .toggle-password {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.1rem;
+    user-select: none;
+    opacity: 0.6;
+  }
+  .toggle-password:hover {
+    opacity: 1;
+  }
+  .forgot-link {
+    display: block;
+    margin-top: 0.5rem;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #2563eb;
+    text-decoration: none;
+  }
+  .forgot-link:hover {
+    text-decoration: underline;
+  }
+</style>
