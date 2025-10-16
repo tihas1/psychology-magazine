@@ -1,3 +1,6 @@
+// --- assets/js/auth.js ---
+// Works with firebase v8 loaded in default.html
+
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof firebase === "undefined" || !firebase.auth) {
     console.error("❌ Firebase not loaded. Check firebase-init.js and default.html script order.");
@@ -5,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const auth = firebase.auth();
+  const db = firebase.firestore();
 
   const loginModal = document.getElementById("loginModal");
   const loginBtn = document.getElementById("loginBtn");
@@ -17,15 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let isLoginMode = true;
 
-  // --- Open modal
+  // --- Modal open/close ---
   loginBtn?.addEventListener("click", () => loginModal.classList.add("open"));
-
-  // --- Close modal on outside click
   loginModal?.addEventListener("click", (e) => {
     if (e.target === loginModal) loginModal.classList.remove("open");
   });
 
-  // --- Toggle login/register
+  // --- Toggle between login & register ---
   toggleAuthMode?.addEventListener("click", () => {
     isLoginMode = !isLoginMode;
     if (isLoginMode) {
@@ -38,38 +40,22 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleAuthMode.innerText = "Already registered? Login";
     }
   });
-// --- Password Toggle (works for all forms)
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("toggle-password")) {
-    const targetId = e.target.dataset.target;
-    const input = document.getElementById(targetId);
 
-    if (input) {
-      if (input.type === "password") {
-        input.type = "text";
-        e.target.textContent = "🙈";
-      } else {
-        input.type = "password";
-        e.target.textContent = "👁";
-      }
-    }
-  }
-});
+  // --- Show password toggles ---
+  const showLoginPassword = document.getElementById("showLoginPassword");
+  const showRegisterPassword = document.getElementById("showRegisterPassword");
 
-  // --- Forgot Password
-  forgotPasswordLink?.addEventListener("click", (e) => {
-    e.preventDefault();
-    const email = loginForm.email.value;
-    if (!email) {
-      alert("Please enter your email first.");
-      return;
-    }
-    auth.sendPasswordResetEmail(email)
-      .then(() => alert("✅ Password reset email sent! Check your inbox."))
-      .catch(err => alert(err.message));
+  showLoginPassword?.addEventListener("change", (e) => {
+    const pass = loginForm.querySelector('input[name="password"]');
+    pass.type = e.target.checked ? "text" : "password";
   });
 
-  // --- Login
+  showRegisterPassword?.addEventListener("change", (e) => {
+    const pass = registerForm.querySelector('input[name="password"]');
+    pass.type = e.target.checked ? "text" : "password";
+  });
+
+  // --- Login ---
   loginForm?.addEventListener("submit", (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -79,42 +65,56 @@ document.addEventListener("click", (e) => {
       .catch(err => alert(err.message));
   });
 
-  // --- Register
-registerForm?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = e.target.email.value;
-  const password = e.target.password.value;
-  const displayName = e.target.displayName.value;
+  // --- Register ---
+  registerForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const displayName = e.target.displayName.value;
 
-  auth.createUserWithEmailAndPassword(email, password)
-    .then((cred) => {
-      return cred.user.updateProfile({ displayName });
-    })
-    .then(() => {
-      loginModal.classList.remove("open");
-    })
-    .catch(err => alert(err.message));
-});
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCred) => {
+        const user = userCred.user;
+        user.updateProfile({ displayName });
 
+        // ✅ Create Firestore user record
+        return db.collection("users").doc(user.uid).set({
+          displayName,
+          email,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      })
+      .then(() => loginModal.classList.remove("open"))
+      .catch(err => alert(err.message));
+  });
 
-  // --- Logout
+  // --- Forgot password ---
+  forgotPasswordLink?.addEventListener("click", (e) => {
+    e.preventDefault();
+    const email = prompt("Enter your email for password reset:");
+    if (email) {
+      auth.sendPasswordResetEmail(email)
+        .then(() => alert("Password reset email sent!"))
+        .catch(err => alert(err.message));
+    }
+  });
+
+  // --- Logout ---
   logoutBtn?.addEventListener("click", () => auth.signOut());
 
-  // --- Auth state
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    userEmailDisplay.innerText = `Hi, ${user.email}`;
-    loginBtn.style.display = "none";
-    logoutBtn.style.display = "inline-block";
-    userEmailDisplay.style.display = "inline-block";
-  } else {
-    userEmailDisplay.innerText = "";
-    loginBtn.style.display = "inline-block";
-    logoutBtn.style.display = "none";
-    userEmailDisplay.style.display = "none";
-  }
+  // --- Auth state listener ---
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      const name = user.displayName || user.email.split("@")[0];
+      userEmailDisplay.innerText = `Hi, ${name}`;
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+      userEmailDisplay.style.display = "inline-block";
+    } else {
+      userEmailDisplay.innerText = "";
+      loginBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+      userEmailDisplay.style.display = "none";
+    }
+  });
 });
-
-
-
-
