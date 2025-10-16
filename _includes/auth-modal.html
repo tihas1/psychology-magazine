@@ -1,39 +1,29 @@
-<!-- _includes/auth-modal.html -->
-<div id="fc-auth-modal" class="fc-auth-modal" style="display:none;">
+<div id="loginModal" class="fc-auth-modal">
   <div class="fc-auth-card">
-    <button class="fc-auth-close" title="Close">✕</button>
+    <button class="fc-auth-close" title="Close" onclick="document.getElementById('loginModal').classList.remove('open');">✕</button>
+    
     <div class="fc-auth-tabs">
-      <button id="fc-tab-login" class="tab active">Login</button>
-      <button id="fc-tab-register" class="tab">Register</button>
+      <button id="toggleAuthMode" class="tab">Don't have an account? Register</button>
     </div>
 
     <div class="fc-auth-body">
       <p id="fc-auth-msg" style="color:#b91c1c;"></p>
 
-      <form id="fc-login-form" style="display:block;">
+      <form id="loginForm" style="display:block;">
         <label>Email</label>
-        <input id="fc-login-email" type="email" required />
+        <input name="email" type="email" required />
         <label>Password</label>
-        <input id="fc-login-pass" type="password" required />
+        <input name="password" type="password" required />
         <button type="submit">Sign In</button>
       </form>
 
-      <form id="fc-register-form" style="display:none;">
+      <form id="registerForm" style="display:none;">
         <label>Email</label>
-        <input id="fc-register-email" type="email" required />
+        <input name="email" type="email" required />
         <label>Password</label>
-        <input id="fc-register-pass" type="password" required />
+        <input name="password" type="password" required />
         <button type="submit">Create Account</button>
       </form>
     </div>
   </div>
 </div>
-
-<!-- map ids expected by auth.js -->
-<script>
-  // map to ids used in auth.js (backwards compatibility)
-  // the file loading order ensures this script runs after the HTML exists
-  document.getElementById('fc-tab-login')?.id && (function(){
-    // nothing here; just ensures the DOM elements exist for auth.js to bind
-  })();
-</script>
