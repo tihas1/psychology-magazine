@@ -81,14 +81,22 @@ document.addEventListener("click", (e) => {
   });
 
   // --- Register
-  registerForm?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(() => loginModal.classList.remove("open"))
-      .catch(err => alert(err.message));
-  });
+registerForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+  const displayName = e.target.displayName.value;
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((cred) => {
+      return cred.user.updateProfile({ displayName });
+    })
+    .then(() => {
+      loginModal.classList.remove("open");
+    })
+    .catch(err => alert(err.message));
+});
+
 
   // --- Logout
   logoutBtn?.addEventListener("click", () => auth.signOut());
@@ -108,4 +116,5 @@ document.addEventListener("click", (e) => {
     }
   });
 });
+
 
