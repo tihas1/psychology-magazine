@@ -484,3 +484,19 @@ body {
 #comment-form button:hover {
   background: #80d3c9;
 }
+.content-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Optional for better readability */
+.post-header, .post-content, .post-footer {
+  width: 100%;
+}
+
+.featured-image {
+  width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
