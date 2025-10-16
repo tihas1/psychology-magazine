@@ -23,21 +23,23 @@
         <a href="#" id="forgotPasswordLink" class="forgot-link">Forgot password?</a>
         <button type="submit">Sign In</button>
       </form>
-
       <!-- REGISTER FORM -->
-      <form id="registerForm" style="display:none;">
-        <label>Email</label>
-        <input name="email" type="email" required />
+<form id="registerForm" style="display:none;">
+  <label>Display Name</label>
+  <input name="displayName" type="text" required />
 
-        <label>Password</label>
-        <div class="password-wrapper">
-          <input id="registerPassword" name="password" type="password" required />
-          <span class="toggle-password" data-target="registerPassword">👁</span>
+  <label>Email</label>
+  <input name="email" type="email" required />
+
+  <label>Password</label>
+  <div class="password-wrapper">
+    <input id="registerPassword" name="password" type="password" required />
+    <span class="toggle-password" data-target="registerPassword">👁</span>
+  </div>
+
+  <button type="submit">Create Account</button>
+</form>
         </div>
-
-        <button type="submit">Create Account</button>
-      </form>
-    </div>
   </div>
 </div>
 
