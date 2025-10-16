@@ -10,10 +10,13 @@ import {
 
 // ✅ Replace with your Firebase project credentials
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBdpseoX9t3uEB_nPzRTjdkJRqExCUvyQQ",
+  authDomain: "crafted-content-92d88.firebaseapp.com",
+  projectId: "crafted-content-92d88",
+  storageBucket: "crafted-content-92d88.firebasestorage.app",
+  messagingSenderId: "603925222453",
+  appId: "1:603925222453:web:886a9dc56817fee4128d7c",
+  measurementId: "G-3Q1RFWSB4W"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -96,3 +99,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
