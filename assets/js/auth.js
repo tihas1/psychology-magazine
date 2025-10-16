@@ -99,21 +99,22 @@ registerForm?.addEventListener("submit", (e) => {
 
   // --- Logout
   logoutBtn?.addEventListener("click", () => auth.signOut());
-
-  // --- Auth state
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      userEmailDisplay.innerText = `Hi, ${user.email}`;
-      loginBtn.style.display = "none";
-      logoutBtn.style.display = "inline-block";
-      userEmailDisplay.style.display = "inline-block";
-    } else {
-      userEmailDisplay.innerText = "";
-      loginBtn.style.display = "inline-block";
-      logoutBtn.style.display = "none";
-      userEmailDisplay.style.display = "none";
-    }
-  });
+// --- Auth state
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    // Prefer display name if available, otherwise fallback to email
+    const nameToShow = user.displayName || user.email;
+    userEmailDisplay.innerText = `Hi, ${nameToShow}`;
+    
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+    userEmailDisplay.style.display = "inline-block";
+  } else {
+    userEmailDisplay.innerText = "";
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
+    userEmailDisplay.style.display = "none";
+  }
 });
 
 
