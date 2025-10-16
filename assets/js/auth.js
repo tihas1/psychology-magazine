@@ -1,11 +1,25 @@
-// --- AUTH.JS ---
+// --- assets/js/auth.js ---
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { 
+  getAuth, 
+  onAuthStateChanged, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut 
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-// Ensure Firebase Auth is loaded
-if (!window.auth) {
-  console.error("Firebase Auth not initialized. Check firebase-init.js");
-}
+// ✅ Replace with your Firebase project credentials
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  appId: "YOUR_APP_ID"
+};
 
-// DOM References
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// --- DOM logic ---
 document.addEventListener("DOMContentLoaded", () => {
   const loginModal = document.getElementById("loginModal");
   const loginBtn = document.getElementById("loginBtn");
@@ -16,19 +30,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleAuthMode = document.getElementById("toggleAuthMode");
   let isLoginMode = true;
 
-  // ✅ Open Modal
-  if (loginBtn) {
-    loginBtn.addEventListener("click", () => {
-      loginModal.classList.add("open");
-    });
-  }
+  // ✅ Open modal
+  loginBtn?.addEventListener("click", () => {
+    loginModal.classList.add("open");
+  });
 
-  // ✅ Close on background click
+  // ✅ Close modal on outside click
   loginModal?.addEventListener("click", (e) => {
     if (e.target === loginModal) loginModal.classList.remove("open");
   });
 
-  // ✅ Toggle Login/Register UI
+  // ✅ Toggle between login & register
   toggleAuthMode?.addEventListener("click", () => {
     isLoginMode = !isLoginMode;
     if (isLoginMode) {
@@ -47,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    auth.signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         loginModal.classList.remove("open");
       })
@@ -59,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    auth.createUserWithEmailAndPassword(email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         loginModal.classList.remove("open");
       })
@@ -67,20 +79,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ✅ Logout
-  logoutBtn?.addEventListener("click", () => {
-    auth.signOut();
-  });
+  logoutBtn?.addEventListener("click", () => signOut(auth));
 
-  // ✅ Detect login state & update UI
-  auth?.onAuthStateChanged(user => {
+  // ✅ Auth state listener
+  onAuthStateChanged(auth, (user) => {
     if (user) {
-      // Logged in
       userEmailDisplay.innerText = `Hi, ${user.email}`;
       loginBtn.style.display = "none";
       logoutBtn.style.display = "inline-block";
       userEmailDisplay.style.display = "inline-block";
     } else {
-      // Logged out
       userEmailDisplay.innerText = "";
       loginBtn.style.display = "inline-block";
       logoutBtn.style.display = "none";
