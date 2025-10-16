@@ -7,7 +7,7 @@ if (!window.firebase || !window.db) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const postId = window.location.pathname.replace(/\//g, "_"); // unique doc per post
+  const postId = window.location.pathname.replace(/\//g, "_");
   const commentForm = document.getElementById("comment-form");
   const commentInput = document.getElementById("comment-input");
   const commentList = document.getElementById("comment-list");
@@ -20,44 +20,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const reactionsRef = db.collection("posts").doc(postId);
 
   // --- 🧡 Handle Reactions ---
-  reactionBtns.forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const type = btn.dataset.type;
-      const user = firebase.auth().currentUser;
+  if (reactionBtns.length > 0) {
+    reactionBtns.forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const type = btn.dataset.type;
+        const user = firebase.auth().currentUser;
 
-      if (!user) {
-        alert("Please log in to react to posts.");
-        return;
-      }
-
-      const reactionDoc = reactionsRef.collection("reactions").doc(user.uid);
-
-      try {
-        const snapshot = await reactionDoc.get();
-        if (snapshot.exists && snapshot.data().type === type) {
-          // Remove reaction (toggle off)
-          await reactionDoc.delete();
-        } else {
-          // Set or change reaction
-          await reactionDoc.set({
-            type,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-          });
+        if (!user) {
+          alert("Please log in to react to posts.");
+          return;
         }
-      } catch (err) {
-        console.error("Reaction error:", err);
-      }
-    });
-  });
 
-  // Real-time update of total reactions
-  reactionsRef.collection("reactions").onSnapshot((snap) => {
-    const total = snap.size;
-    reactionCount.textContent = total;
-  });
+        const reactionDoc = reactionsRef.collection("reactions").doc(user.uid);
+
+        try {
+          const snapshot = await reactionDoc.get();
+          if (snapshot.exists && snapshot.data().type === type) {
+            await reactionDoc.delete();
+          } else {
+            await reactionDoc.set({
+              type,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+          }
+        } catch (err) {
+          console.error("Reaction error:", err);
+        }
+      });
+    });
+
+    // Real-time update of total reactions
+    reactionsRef.collection("reactions").onSnapshot((snap) => {
+      const total = snap.size;
+      if (reactionCount) reactionCount.textContent = total; // ✅ Safe check
+    });
+  }
 
   // --- 💬 Handle Comments ---
-  if (commentForm) {
+  if (commentForm && commentInput && commentList) {
     commentForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const text = commentInput.value.trim();
@@ -83,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Real-time listener for comments
     commentsRef.orderBy("timestamp", "desc").onSnapshot((snap) => {
       commentList.innerHTML = "";
       snap.forEach((doc) => {
