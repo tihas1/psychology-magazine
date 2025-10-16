@@ -7,6 +7,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
 /* auth modal */
 /* --- Auth Modal Styling --- */
+/* Modal (login) UI contrast tweaks */
+.fc-auth-modal,
+.fc-auth-card {
+  color: #222 !important;        /* darker text */
+  background: #fff !important;   /* ensure white background */
+}
+
+/* Adjust close button, labels, input text */
+.fc-auth-close {
+  color: #333;
+}
+.fc-auth-card label {
+  color: #222;
+  font-weight: 600;
+}
+.fc-auth-card input {
+  color: #222;         /* user-input text */
+  background: #fafafa;
+  border: 1px solid #bbb;
+}
+.fc-auth-card p#error, #fc-auth-msg {
+  color: #b91c1c;  /* error messages remain red */
+}
+
+/* Buttons inside modal */
+.fc-auth-card button[type="submit"] {
+  background: var(--accent, #2a9d8f);
+  color: white;
+}
+.fc-auth-card button[type="submit"]:hover {
+  background: #23877e;
+}
+
 .fc-auth-modal {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
