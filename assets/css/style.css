@@ -400,3 +400,87 @@ body.dark .site-footer {
   font-size: 1.05rem;
   line-height: 1.8;
 }
+/* === Pastel Theme Adjustments === */
+body {
+  background-color: #eaf7f3;
+  color: #222;
+}
+
+.post-footer {
+  background: #f0fafc;
+  border-top: 2px solid #b2e3de;
+  padding: 2rem 1rem;
+  border-radius: 10px;
+}
+
+/* Reaction + Share */
+.reaction-bar, .share-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.react-btn {
+  background: #d8f3e5;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.react-btn:hover {
+  transform: scale(1.2);
+  background: #b8ebce;
+}
+
+.share-bar a, .share-btn {
+  background: #b6e0f7;
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  text-decoration: none;
+  color: #03396c;
+  transition: background 0.3s ease;
+}
+.share-bar a:hover, .share-btn:hover {
+  background: #92d0f0;
+}
+
+/* Comments */
+.comment-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #f9ffff;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.comment-section h3 {
+  text-align: center;
+  color: #055c5c;
+}
+
+#comment-input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #c0e2e2;
+  resize: vertical;
+}
+
+#comment-form button {
+  background: #a5dfd8;
+  border: none;
+  border-radius: 8px;
+  margin-top: 0.8rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+#comment-form button:hover {
+  background: #80d3c9;
+}
